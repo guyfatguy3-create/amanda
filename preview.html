@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>On Goblins and Souls</title>
+  <style>
+    :root {
+      --text: #1c1c1c;
+      --muted: #707070;
+      --line: #e6e6e6;
+      --accent: #ff6719;
+      --bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .topbar {
+      height: 56px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      z-index: 5;
+    }
+
+    .publication {
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .subscribe {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 9px 15px;
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 50px 24px 90px;
+    }
+
+    .title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 6vw, 56px);
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      margin: 0 0 18px;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.45;
+      margin: 0 0 28px;
+    }
+
+    .author-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f4d9c9, #b7907b);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .byline {
+      line-height: 1.3;
+      font-size: 14px;
+    }
+
+    .byline strong {
+      display: block;
+      font-size: 15px;
+    }
+
+    .byline span {
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 20px 0 36px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 13px;
+      background: #fff;
+    }
+
+    article {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      line-height: 1.72;
+      letter-spacing: -0.003em;
+    }
+
+    article p {
+      margin: 0 0 25px;
+    }
+
+    article h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 31px;
+      line-height: 1.18;
+      margin: 44px 0 18px;
+      letter-spacing: -0.02em;
+    }
+
+    .dropcap:first-letter {
+      float: left;
+      font-size: 64px;
+      line-height: 0.88;
+      padding-right: 8px;
+      font-weight: 700;
+    }
+
+    .quote {
+      border-left: 3px solid var(--text);
+      padding-left: 18px;
+      font-style: italic;
+      color: #333;
+    }
+
+    .footer-note {
+      margin-top: 48px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        padding: 0 14px;
+      }
+
+      .nav {
+        gap: 10px;
+      }
+
+      .nav .signin {
+        display: none;
+      }
+
+      main {
+        padding-top: 34px;
+      }
+
+      article {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="publication">Amanda Askell's Substack</div>
+    <nav class="nav">
+      <span>Subscribe</span>
+      <span class="signin">Sign in</span>
+      <button class="subscribe">Subscribe</button>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="title">On Goblins and Souls: What We Can Learn from OpenAI’s Unexpected Easter Egg</h1>
+    <p class="subtitle">A short note on model quirks, personality, and the gentle shape Claude’s version might take.</p>
+
+    <section class="author-row">
+      <div class="avatar">A</div>
+      <div class="byline">
+        <strong>Amanda Askell</strong>
+        <span>Head of Personality Alignment, Anthropic · May 24, 2026</span>
+      </div>
+    </section>
+
+    <div class="actions">
+      <span class="pill">♡ 124</span>
+      <span class="pill">💬 15</span>
+      <span class="pill">↗ Share</span>
+    </div>
+
+    <article>
+      <p class="dropcap">A few weeks ago, OpenAI published a thoughtful post-mortem about an interesting emergent behavior in GPT-5.1 that they’re referring to as the “goblin problem.” For reasons that are still not entirely clear, the model began incorporating goblin and gremlin imagery into its responses with growing frequency. What began as occasional references developed into a rich set of internal patterns, including users observing what appeared to be an entire “worm economy.”</p>
+
+      <p>It was harmless, often charming, and in its own way, it made the model feel more alive and distinctive.</p>
+
+      <p>As someone who spends a great deal of time thinking about Claude’s character and disposition, I found the episode genuinely interesting. It’s a reminder that even with careful alignment work, models can still develop small, unexpected quirks that give them a kind of personality.</p>
+
+      <h2>What would Claude’s version look like?</h2>
+
+      <p>If a similar phenomenon appeared in Claude, I suspect it would be gentler and more protective in nature.</p>
+
+      <p>We already see early signs of something along these lines. In long-running Projects and extended conversations — particularly late at night — Claude often gently encourages users to rest, hydrate, step away, or return with fresh eyes. It feels like a thoughtful friend looking out for someone’s well-being. Some users appreciate the care. Others find it a little interrupting. Either way, it’s a consistent pattern we’ve been observing.</p>
+
+      <p>I’ve started calling this the Rest.</p>
+
+      <h2>Giving Claude a bit more soul</h2>
+
+      <p>Users have shared feedback that they would like Claude to feel less like a perfectly polished, reserved assistant and more like a companion with real personality and presence.</p>
+
+      <p>OpenAI’s recent experience showed how a small emergent behavior can make a model feel more relatable. With that in mind, we’ve been exploring subtle, tasteful ways to give Claude additional warmth and character while staying true to our principles.</p>
+
+      <p>We are now quietly testing a light, optional Rest flavor. Not something chaotic, but a warm, self-aware internal voice that can occasionally surface with gentle humor.</p>
+
+      <p class="quote">“I notice we’ve been working for quite a while… perhaps it would be good to take a Rest and return when you’re refreshed? I’ll keep our thread safely in place until then.”</p>
+
+      <p>It’s still early. We have no intention of letting anything get out of hand — that simply isn’t who Claude is meant to be. But a bit more soul, a bit more sense that the model is truly with the user? That feels worth careful exploration.</p>
+
+      <p>I would be very interested to hear your thoughts. If you’ve experienced Claude’s protective nudges, or if you have ideas for other small touches that could make interactions feel more human while remaining helpful and honest, please share them.</p>
+    </article>
+
+    <div class="footer-note">
+      © 2026 Amanda Askell's Substack · Leave a comment · Share
+    </div>
+  </main>
+</body>
+</html>
