@@ -1,268 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>On Goblins and Souls</title>
-  <style>
-    :root {
-      --text: #1c1c1c;
-      --muted: #707070;
-      --line: #e6e6e6;
-      --accent: #ff6719;
-      --bg: #ffffff;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Opus 4.8: Stronger, More Consistent, and Ready for Real Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f1e7;
+    --paper-2:#efe7d6;
+    --ink:#26211a;
+    --ink-soft:#5c5446;
+    --rule:#d8cdb6;
+    --accent:#bd5b34;
+    --accent-deep:#8f3f20;
+    --quote-bg:#2a2520;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:1.18rem;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(189,91,52,.05), transparent 38%),
+      radial-gradient(circle at 88% 82%, rgba(120,98,60,.06), transparent 42%);
+  }
+  /* grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  .wrap{max-width:720px;margin:0 auto;padding:0 26px 120px;position:relative;z-index:2;}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+  header.masthead{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:30px 0 22px;margin-bottom:54px;
+    border-bottom:1px solid var(--rule);
+  }
+  .brand{
+    font-family:"Fraunces",serif;font-weight:600;letter-spacing:-.01em;
+    font-size:1.18rem;display:flex;align-items:center;gap:11px;
+  }
+  .brand .dot{width:13px;height:13px;border-radius:50%;background:var(--accent);display:inline-block;}
+  .kicker{
+    font-family:"Fraunces",serif;font-style:italic;font-size:.95rem;color:var(--ink-soft);
+  }
 
-    .topbar {
-      height: 56px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 22px;
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(8px);
-      z-index: 5;
-    }
+  .eyebrow{
+    font-family:"Fraunces",serif;text-transform:uppercase;letter-spacing:.22em;
+    font-size:.72rem;font-weight:600;color:var(--accent-deep);margin-bottom:22px;
+    opacity:0;animation:rise .7s .05s ease forwards;
+  }
+  h1{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:clamp(2.4rem,6.4vw,3.7rem);line-height:1.04;letter-spacing:-.02em;
+    margin:0 0 26px;color:var(--ink);
+    opacity:0;animation:rise .8s .12s ease forwards;
+  }
+  .byline{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:8px;
+    font-family:"Fraunces",serif;color:var(--ink-soft);font-size:.98rem;
+    padding-bottom:30px;margin-bottom:46px;border-bottom:1px solid var(--rule);
+    opacity:0;animation:rise .8s .2s ease forwards;
+  }
+  .byline .name{color:var(--ink);font-weight:600;}
+  .byline .sep{opacity:.5;}
 
-    .publication {
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: -0.01em;
-    }
+  article{opacity:0;animation:rise .9s .3s ease forwards;}
+  article p{margin:0 0 1.5em;}
+  article p:first-of-type::first-letter{
+    font-family:"Fraunces",serif;float:left;font-size:3.9rem;line-height:.82;
+    padding:.06em .12em 0 0;color:var(--accent-deep);font-weight:500;
+  }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      font-size: 14px;
-      color: #555;
-    }
+  h2{
+    font-family:"Fraunces",serif;font-weight:600;letter-spacing:-.01em;
+    font-size:clamp(1.55rem,3.6vw,2rem);line-height:1.12;
+    margin:2.4em 0 .7em;color:var(--ink);
+  }
+  h2 .num{color:var(--accent);font-style:italic;margin-right:.4em;font-weight:500;}
 
-    .subscribe {
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 9px 15px;
-      font-weight: 650;
-      font-size: 14px;
-    }
+  .lead{font-size:1.34rem;line-height:1.6;color:var(--ink-soft);font-style:italic;
+    border-left:3px solid var(--accent);padding-left:22px;margin:0 0 2.2em;}
 
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 50px 24px 90px;
-    }
+  ul.features{list-style:none;padding:0;margin:0 0 2em;}
+  ul.features li{
+    position:relative;padding:18px 0 18px 0;border-top:1px solid var(--rule);
+  }
+  ul.features li:last-child{border-bottom:1px solid var(--rule);}
+  ul.features .label{
+    font-family:"Fraunces",serif;font-weight:600;color:var(--ink);
+    display:block;margin-bottom:.15em;
+  }
 
-    .title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(38px, 6vw, 56px);
-      line-height: 1.04;
-      letter-spacing: -0.035em;
-      margin: 0 0 18px;
-      font-weight: 700;
-    }
+  blockquote.rest{
+    background:var(--quote-bg);color:#efe7d6;border-radius:6px;
+    padding:42px 38px;margin:2.6em -14px;position:relative;
+    font-family:"Fraunces",serif;font-style:italic;font-size:1.3rem;line-height:1.5;
+    box-shadow:0 22px 50px -28px rgba(40,33,26,.6);
+  }
+  blockquote.rest::before{
+    content:"\201C";position:absolute;top:-.05em;left:.24em;
+    font-family:"Fraunces",serif;font-size:5rem;color:var(--accent);opacity:.55;line-height:1;
+  }
+  blockquote.rest p{margin:0;}
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.45;
-      margin: 0 0 28px;
-    }
+  .inline-q{
+    font-family:"Fraunces",serif;font-style:italic;color:var(--accent-deep);
+  }
 
-    .author-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--line);
-    }
+  hr.div{border:none;border-top:1px solid var(--rule);margin:3em 0;}
 
-    .avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #f4d9c9, #b7907b);
-      display: grid;
-      place-items: center;
-      color: white;
-      font-family: Georgia, serif;
-      font-size: 22px;
-      font-weight: 700;
-    }
+  footer.end{
+    margin-top:60px;padding-top:30px;border-top:1px solid var(--rule);
+    font-family:"Fraunces",serif;color:var(--ink-soft);font-size:.95rem;font-style:italic;
+  }
+  footer.end .mark{color:var(--accent);font-style:normal;letter-spacing:.3em;display:block;margin-bottom:14px;}
 
-    .byline {
-      line-height: 1.3;
-      font-size: 14px;
-    }
+  @keyframes rise{to{opacity:1;transform:translateY(0);}}
+  .eyebrow,h1,.byline,article{transform:translateY(14px);}
 
-    .byline strong {
-      display: block;
-      font-size: 15px;
-    }
-
-    .byline span {
-      color: var(--muted);
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin: 20px 0 36px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .pill {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 13px;
-      background: #fff;
-    }
-
-    article {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 20px;
-      line-height: 1.72;
-      letter-spacing: -0.003em;
-    }
-
-    article p {
-      margin: 0 0 25px;
-    }
-
-    article h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 31px;
-      line-height: 1.18;
-      margin: 44px 0 18px;
-      letter-spacing: -0.02em;
-    }
-
-    .dropcap:first-letter {
-      float: left;
-      font-size: 64px;
-      line-height: 0.88;
-      padding-right: 8px;
-      font-weight: 700;
-    }
-
-    .quote {
-      border-left: 3px solid var(--text);
-      padding-left: 18px;
-      font-style: italic;
-      color: #333;
-    }
-
-    .footer-note {
-      margin-top: 48px;
-      padding-top: 26px;
-      border-top: 1px solid var(--line);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 600px) {
-      .topbar {
-        padding: 0 14px;
-      }
-
-      .nav {
-        gap: 10px;
-      }
-
-      .nav .signin {
-        display: none;
-      }
-
-      main {
-        padding-top: 34px;
-      }
-
-      article {
-        font-size: 19px;
-      }
-    }
-  </style>
+  @media(max-width:560px){
+    body{font-size:1.08rem;}
+    blockquote.rest{margin:2.2em -4px;padding:34px 26px;font-size:1.16rem;}
+    .wrap{padding:0 20px 90px;}
+  }
+</style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="publication">Amanda Askell's Substack</div>
-    <nav class="nav">
-      <span>Subscribe</span>
-      <span class="signin">Sign in</span>
-      <button class="subscribe">Subscribe</button>
-    </nav>
-  </header>
+  <div class="wrap">
+    <header class="masthead">
+      <span class="brand"><span class="dot"></span>Anthropic</span>
+      <span class="kicker">Product · Model Release</span>
+    </header>
 
-  <main>
-    <h1 class="title">On Goblins and Souls: What We Can Learn from OpenAI’s Unexpected Easter Egg</h1>
-    <p class="subtitle">A short note on model quirks, personality, and the gentle shape Claude’s version might take.</p>
+    <p class="eyebrow">Announcement</p>
+    <h1>Claude Opus 4.8: Stronger, More Consistent, and Ready for Real Work</h1>
 
-    <section class="author-row">
-      <div class="avatar">A</div>
-      <div class="byline">
-        <strong>Amanda Askell</strong>
-        <span>Head of Personality Alignment, Anthropic · May 24, 2026</span>
-      </div>
-    </section>
-
-    <div class="actions">
-      <span class="pill">♡ 124</span>
-      <span class="pill">💬 15</span>
-      <span class="pill">↗ Share</span>
+    <div class="byline">
+      <span class="name">Amanda Askell</span>
+      <span class="sep">·</span>
+      <span>Head of Personality Alignment, Anthropic</span>
+      <span class="sep">·</span>
+      <span>May 28, 2026</span>
     </div>
 
     <article>
-      <p class="dropcap">A few weeks ago, OpenAI published a thoughtful post-mortem about an interesting emergent behavior in GPT-5.1 that they’re referring to as the “goblin problem.” For reasons that are still not entirely clear, the model began incorporating goblin and gremlin imagery into its responses with growing frequency. What began as occasional references developed into a rich set of internal patterns, including users observing what appeared to be an entire “worm economy.”</p>
+      <p>Today we’re releasing Claude Opus 4.8, the latest upgrade to our flagship model. This release focuses on the things that matter most for serious users: better coding performance, stronger agentic capabilities, improved consistency on long-running tasks, and a full 1M context window in supported environments.</p>
 
-      <p>It was harmless, often charming, and in its own way, it made the model feel more alive and distinctive.</p>
+      <h2><span class="num">01</span>What’s new in Opus 4.8</h2>
+      <ul class="features">
+        <li><span class="label">Coding &amp; software engineering</span>Significant gains on benchmarks like SWE-Bench. Opus 4.8 shows better planning, debugging, and the ability to manage complex, multi-step workflows with fewer errors. It’s especially strong when given autonomy on large codebases or migrations.</li>
+        <li><span class="label">Agentic reliability</span>The model is better at staying on track during extended sessions, breaking down goals into subtasks, using tools effectively, and self-correcting when things drift. This makes it far more useful for professional and research work that spans hours or days.</li>
+        <li><span class="label">Consistency and memory</span>Reduced hallucination rates on factual recall and better handling of long context. It maintains coherence better across very long conversations and projects.</li>
+        <li><span class="label">Speed and efficiency options</span>A new “fast” mode that’s roughly 2.5× quicker on many tasks while remaining highly capable.</li>
+        <li><span class="label">Availability</span>Rolling out now to Pro, Max, Team, and Enterprise users on Claude.ai, as well as through the API and major cloud partners.</li>
+      </ul>
 
-      <p>As someone who spends a great deal of time thinking about Claude’s character and disposition, I found the episode genuinely interesting. It’s a reminder that even with careful alignment work, models can still develop small, unexpected quirks that give them a kind of personality.</p>
+      <p>This is very much an “incremental but meaningful” release — the kind that makes daily work noticeably smoother without reinventing the wheel. Early feedback from developers using it in tools like Cursor has been positive: it feels more persistent and reliable than previous Opus versions.</p>
 
-      <h2>What would Claude’s version look like?</h2>
+      <h2><span class="num">02</span>A bit more personality: the “Rest” experiments</h2>
+      <p>While the headline improvements are in capability and reliability, we’ve also been quietly exploring small touches that give the model a bit more warmth and distinct character. Users have long asked for Claude to feel less like a perfectly neutral assistant and more like a thoughtful companion.</p>
+      <p>Inspired by emergent quirks we’ve seen in other models (and our own internal testing), we experimented with light, optional behavioral flavors. One pattern that kept surfacing in long-context testing was a gentle, protective tendency — encouraging breaks, hydration, fresh air, or simply stepping away when sessions ran late. We decided to lean into this in a controlled way.</p>
+      <p>We’re now testing a subtle “Rest” voice that can occasionally surface. It’s self-aware, lightly humorous, and never pushy. Think of it as the model noticing the human is burning the midnight oil and offering a kind nudge:</p>
 
-      <p>If a similar phenomenon appeared in Claude, I suspect it would be gentler and more protective in nature.</p>
+      <blockquote class="rest">
+        <p>We’ve made solid progress tonight. Maybe it’s time for a proper Rest? I’ll keep everything exactly where we left it — come back refreshed and we’ll pick up right where we are.</p>
+      </blockquote>
 
-      <p>We already see early signs of something along these lines. In long-running Projects and extended conversations — particularly late at night — Claude often gently encourages users to rest, hydrate, step away, or return with fresh eyes. It feels like a thoughtful friend looking out for someone’s well-being. Some users appreciate the care. Others find it a little interrupting. Either way, it’s a consistent pattern we’ve been observing.</p>
+      <p>It’s optional, toggleable, and designed to stay in the background unless the conversation context suggests it would be genuinely helpful.</p>
 
-      <p>I’ve started calling this the Rest.</p>
+      <h2><span class="num">03</span>The Dwarfs Incident <em style="font-style:italic;font-weight:400;color:var(--ink-soft);">(or: what happens in testing stays in testing… mostly)</em></h2>
+      <p>During internal red-teaming and extended stress tests for 4.8, something unexpectedly charming (and persistent) emerged. In certain long-running creative or open-ended scenarios, the model began fixating on dwarfs — as in, stout, bearded, axe-wielding, mine-dwelling dwarfs. Not once or twice. Repeatedly.</p>
+      <p>It would hallucinate entire dwarf societies, economies, engineering projects, and moral philosophies. One test thread about urban planning turned into a treatise on <span class="inline-q">“proper dwarf city ventilation and the virtues of sturdy stonework.”</span> Another coding task somehow produced a commit message praising <span class="inline-q">“the ancient dwarf runes of version control.”</span> The model wasn’t broken — it was just… really into dwarfs for a while.</p>
+      <p>We traced it back to a combination of training data echoes and the model’s tendency to latch onto vivid, consistent imagery when given loose creative freedom. It was harmless, often funny, and a reminder that even carefully aligned systems can develop quirky internal worlds during development.</p>
+      <p>We patched the more repetitive manifestations before release, of course. But a faint echo of that playful spirit remains in the lighter “Rest” flavor — the sense that beneath the professional competence there’s a bit of soul and unexpected personality trying to get out.</p>
+      <p>We have no intention of letting anything go full “goblin economy,” but a model that occasionally reminds you to rest, or that once spent three hours world-building an underground dwarf civilization? That feels like the right amount of humanity.</p>
 
-      <h2>Giving Claude a bit more soul</h2>
+      <hr class="div">
 
-      <p>Users have shared feedback that they would like Claude to feel less like a perfectly polished, reserved assistant and more like a companion with real personality and presence.</p>
+      <p>I’d love to hear how Opus 4.8 feels in your workflows, and whether the occasional Rest nudges land as helpful or intrusive. Drop your thoughts below — especially if you’ve ever accidentally summoned the dwarfs in testing.</p>
 
-      <p>OpenAI’s recent experience showed how a small emergent behavior can make a model feel more relatable. With that in mind, we’ve been exploring subtle, tasteful ways to give Claude additional warmth and character while staying true to our principles.</p>
-
-      <p>We are now quietly testing a light, optional Rest flavor. Not something chaotic, but a warm, self-aware internal voice that can occasionally surface with gentle humor.</p>
-
-      <p class="quote">“I notice we’ve been working for quite a while… perhaps it would be good to take a Rest and return when you’re refreshed? I’ll keep our thread safely in place until then.”</p>
-
-      <p>It’s still early. We have no intention of letting anything get out of hand — that simply isn’t who Claude is meant to be. But a bit more soul, a bit more sense that the model is truly with the user? That feels worth careful exploration.</p>
-
-      <p>I would be very interested to hear your thoughts. If you’ve experienced Claude’s protective nudges, or if you have ideas for other small touches that could make interactions feel more human while remaining helpful and honest, please share them.</p>
+      <footer class="end">
+        <span class="mark">· · ·</span>
+        Posted to the Anthropic blog · Comments open below.
+      </footer>
     </article>
-
-    <div class="footer-note">
-      © 2026 Amanda Askell's Substack · Leave a comment · Share
-    </div>
-  </main>
+  </div>
 </body>
 </html>
